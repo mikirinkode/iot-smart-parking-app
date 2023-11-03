@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "543178397671",
+    "firebase_url": "https://iotakhir-6cd0b-default-rtdb.firebaseio.com",
+    "project_id": "iotakhir-6cd0b",
+    "storage_bucket": "iotakhir-6cd0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543178397671:android:7eec8cebf032d4f60b0f42",
+        "android_client_info": {
+          "package_name": "com.mikirinkode.projectiot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaYLlrhDKDRBqA_XjB29xf__TSl-7fqfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543178397671:android:e035fba0fd4e665f0b0f42",
+        "android_client_info": {
+          "package_name": "com.mikirinkode.smartparking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaYLlrhDKDRBqA_XjB29xf__TSl-7fqfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
