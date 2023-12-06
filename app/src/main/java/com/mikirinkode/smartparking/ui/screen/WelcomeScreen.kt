@@ -47,22 +47,12 @@ fun WelcomeScreen(
     onStartClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car))
-
-    var startCar by remember { mutableStateOf(false) }
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animation_riding_car))
 
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever,
-        isPlaying = true
     )
-
-//    if (startCar){
-//        LaunchedEffect(key1 = Unit,){
-//            delay(200)
-//            onStartClicked()
-//        }
-//    }
 
     Column(
         modifier = modifier
