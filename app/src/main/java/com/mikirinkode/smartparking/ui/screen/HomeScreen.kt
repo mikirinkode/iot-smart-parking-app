@@ -1,41 +1,24 @@
 package com.mikirinkode.smartparking.ui.screen
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -84,7 +66,7 @@ fun HomeScreen(
 
     Surface(
         modifier = modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.surface
+        color = MaterialTheme.colorScheme.primaryContainer
     ) {
         Box() {
             Column(
@@ -145,15 +127,13 @@ fun HomeScreen(
                                                     (parking.distance > 6.0)
                                                 ParkingItemCard(
                                                     parkCode = parking.parkCode,
-                                                    isAvailable = isAvailable,
-                                                    carIcon = R.drawable.ic_car_right
+                                                    isAvailable = isAvailable
                                                 )
                                             }
                                             items(dummyParkingAList) { parking ->
                                                 ParkingItemCard(
                                                     parkCode = parking.parkCode,
-                                                    isAvailable = false,
-                                                    carIcon = R.drawable.ic_car_right
+                                                    isAvailable = false
                                                 )
                                             }
                                             item {
@@ -192,8 +172,7 @@ fun HomeScreen(
                                             items(dummyParkingBList) { parking ->
                                                 ParkingItemCard(
                                                     parkCode = parking.parkCode,
-                                                    isAvailable = false,
-                                                    carIcon = R.drawable.ic_car_right
+                                                    isAvailable = false
                                                 )
                                             }
                                             item {
@@ -235,7 +214,6 @@ fun HomeScreen(
 fun ParkingItemCard(
     parkCode: String,
     isAvailable: Boolean,
-    @DrawableRes carIcon: Int,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -271,7 +249,7 @@ fun ParkingItemCard(
         ) {
             Text(
                 text = parkCode,
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = if (isAvailable) {
                     MaterialTheme.colorScheme.primary
@@ -282,9 +260,9 @@ fun ParkingItemCard(
             Spacer(modifier = Modifier.width(12.dp))
             if (!isAvailable) {
                 Image(
-                    painter = painterResource(id = carIcon),
+                    painter = painterResource(id = R.drawable.ic_white_car),
                     contentDescription = "Car Illustration",
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(60.dp)
                 )
             }
         }

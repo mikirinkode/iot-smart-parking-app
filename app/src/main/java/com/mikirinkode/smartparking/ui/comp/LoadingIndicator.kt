@@ -33,11 +33,6 @@ fun LoadingIndicator(
             CircularProgressIndicator(
                 modifier = Modifier.size(40.dp)
             )
-//            LottieAnimationSection(
-//                animationId = R.raw.animation_leaf_loading,
-//                height = 150.dp,
-//                width = 150.dp
-//            )
             Spacer(modifier = Modifier.width(16.dp))
             Text(text = loadingText)
         }
