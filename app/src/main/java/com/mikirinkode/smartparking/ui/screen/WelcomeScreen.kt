@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -48,59 +49,67 @@ fun WelcomeScreen(
         iterations = LottieConstants.IterateForever,
     )
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
+    Surface(
+        color = Color.White
     ) {
-        Box(
-            modifier = Modifier.padding(16.dp)
+        Column(
+            modifier = modifier
+                .fillMaxSize()
         ) {
-            Column() {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Selamat Datang di", fontSize = 16.sp, fontWeight = FontWeight.Medium)
-                Text(
-                    text = "Parkirin.",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 48.sp,
-                    modifier = Modifier.padding(vertical = 0.dp)
-                )
-                Text(
-                    text = "Gak perlu mikirin cari tempat parkir lagi karna sekarang semakin mudah dengan Parkirin.",
-                    fontSize = 14.sp,
-                    modifier = Modifier.offset(y = (-12).dp),
-                    color = Color.Gray
+            Box(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Column() {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Selamat Datang di",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Text(
+                        text = "Parkirin.",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 48.sp,
+                        modifier = Modifier.padding(vertical = 0.dp)
+                    )
+                    Text(
+                        text = "Gak perlu mikirin cari tempat parkir lagi karna sekarang semakin mudah dengan Parkirin.",
+                        fontSize = 14.sp,
+                        modifier = Modifier.offset(y = (-12).dp),
+                        color = Color.Gray
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier.weight(1f)
+            ) {
+                LottieAnimation(
+                    composition = composition,
+                    progress = { progress },
+                    modifier = modifier
+                        .size(400.dp)
+                        .align(Alignment.Center)
+
                 )
             }
-        }
-        Box(
-            modifier = Modifier.weight(1f)
-        ) {
-            LottieAnimation(
-                composition = composition,
-                progress = { progress },
-                modifier = modifier
-                    .size(400.dp)
-                    .align(Alignment.Center)
-
-            )
-        }
-        Box(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Button(
-                onClick = {
-                    onStartClicked()
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                modifier = Modifier.fillMaxWidth()
+            Box(
+                modifier = Modifier.padding(16.dp)
             ) {
-                Row {
-                    Text(text = "Cari Tempat", fontSize = 18.sp, fontWeight = FontWeight.Medium)
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Icon(
-                        imageVector = Icons.Rounded.ArrowForward,
-                        contentDescription = "Arrow Forward"
-                    )
+                Button(
+                    onClick = {
+                        onStartClicked()
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row {
+                        Text(text = "Cari Tempat", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowForward,
+                            contentDescription = "Arrow Forward"
+                        )
+                    }
                 }
             }
         }

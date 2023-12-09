@@ -2,6 +2,10 @@ package com.mikirinkode.smartparking
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.togetherWith
@@ -21,13 +25,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mikirinkode.smartparking.ui.screen.HomeScreen
+import com.mikirinkode.smartparking.ui.screen.ParkingDetailScreen
+import com.mikirinkode.smartparking.ui.screen.ParkingListScreen
 import com.mikirinkode.smartparking.ui.screen.WelcomeScreen
 
 sealed class Screen(val route: String) {
     object Welcome : Screen("welcome")
     object Home : Screen("home")
-    object Main: Screen ("main") // consist of Welcome and Home Screen
+    object Detail : Screen("detail")
 }
 
 @Composable
@@ -39,7 +44,7 @@ fun MainApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val startScreen = Screen.Main.route
+    val startScreen = Screen.Welcome.route
 
     Scaffold(
         modifier = modifier
@@ -47,49 +52,65 @@ fun MainApp(
         NavHost(
             navController = navController,
             startDestination = startScreen,
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            composable(route = Screen.Main.route) {
-                MainRoute()
-            }
-        }
-    }
-}
+            modifier = Modifier.padding(innerPadding),
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None }
 
-@Composable
-fun MainRoute() {
-    var mainScreenState by rememberSaveable { mutableIntStateOf(0) }
-    AnimatedContent(
-        targetState = mainScreenState,
-        transitionSpec = {
-            val animationSpec: TweenSpec<IntOffset> = tween(1000)
-            val direction = if (mainScreenState == 1) {
-                AnimatedContentTransitionScope.SlideDirection.Right
-            } else {
-                AnimatedContentTransitionScope.SlideDirection.Left
-            }
-            slideIntoContainer(
-                towards = direction,
-                animationSpec = animationSpec,
-            ) togetherWith slideOutOfContainer(
-                towards = direction,
-                animationSpec = animationSpec
-            )
-        },
-        label = "mainScreenDataAnimation",
-    ) { targetState ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            when (targetState) {
-                0 -> {
-                    WelcomeScreen(
-                        onStartClicked = {
-                            mainScreenState = 1
-                        }
+        ) {
+            composable(route = Screen.Welcome.route,
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(500, easing = EaseIn)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(500, easing = EaseIn)
                     )
                 }
-                else -> {
-                    HomeScreen()
+            ) {
+                WelcomeScreen(onStartClicked = { navController.navigate(Screen.Home.route) })
+            }
+            composable(
+                route = Screen.Home.route,
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(500, easing = EaseIn)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(500, easing = EaseIn)
+                    )
                 }
+            ) {
+                ParkingListScreen(onItemClicked = { navController.navigate(Screen.Detail.route) })
+            }
+
+            composable(
+                route = Screen.Detail.route,
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(500, easing = EaseIn)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(500, easing = EaseIn)
+                    )
+                }
+            ) {
+                ParkingDetailScreen(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }

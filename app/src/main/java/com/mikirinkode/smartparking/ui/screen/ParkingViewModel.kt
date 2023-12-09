@@ -7,17 +7,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mikirinkode.smartparking.data.Parking
 import com.mikirinkode.smartparking.ui.utils.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-data class Parking(
-    val parkCode: String = "",
-    val distance: Double = 0.0,
-)
 
-class HomeViewModel() : ViewModel() {
-
+class ParkingViewModel() : ViewModel() {
 
     private val _homeState: MutableStateFlow<UiState<List<Parking>>> =
         MutableStateFlow(UiState.Initial)
@@ -25,37 +21,9 @@ class HomeViewModel() : ViewModel() {
 
     private val database = Firebase.database
     private val myRef = database.getReference("parking")
-    private val myMessage = database.getReference("message")
-
-
     fun getData() {
-//        myMessage.addValueEventListener(object: ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                TODO("Not yet implemented")
-//        Log.e("HomeVM", "on data change")
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//        Log.e("HomeVM", "on error")
-//            }
-//        })
-
         Log.e("HomeVM", "getData called")
         _homeState.value = UiState.Loading
-//        val receiveListener = object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                Log.e("HomeVM", "on data change")
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                Log.e("HomeVM", "on error")
-//            }
-//
-//        }
-//
-//        myRef.addValueEventListener(receiveListener)
-
 
         // Read from the database
         myRef.addValueEventListener(object : ValueEventListener {
@@ -78,5 +46,14 @@ class HomeViewModel() : ViewModel() {
                 Log.e("HomeVM", "on error :${error.message}")
             }
         })
+    }
+
+    fun getAvailableSlot(parkingList: List<Parking>): Int {
+        var total = 0
+        parkingList.forEach { parking ->
+            if (parking.distance > 6.0)
+                total++
+        }
+        return total
     }
 }
