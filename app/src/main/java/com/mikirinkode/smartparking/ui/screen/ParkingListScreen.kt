@@ -70,7 +70,7 @@ fun ParkingListScreen(
                                 BuildingItemCard(
                                     parkingName = "Lampung Center Park",
                                     availableSlot = availableSlot,
-                                    maxSlot = 8,
+                                    maxSlot = 14,
                                     onItemClicked = onItemClicked
                                 )
                                 BuildingItemCard(

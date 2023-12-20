@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ fun BuildingItemCard(
                 color = MaterialTheme.colorScheme.primaryContainer,
                 shape = MaterialTheme.shapes.medium
             )
-//            .border(color = Color.Gray, width = (1.5).dp, shape = MaterialTheme.shapes.medium)
+            .clip(shape = MaterialTheme.shapes.medium)
             .clickable(onClick = onItemClicked)
     ) {
         Row(

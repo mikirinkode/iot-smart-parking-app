@@ -80,27 +80,29 @@ fun ParkingDetailScreen(
                             is UiState.Error -> {}
                             is UiState.Success -> {
                                 val parkingList = state.data
-                                Column(
-                                    modifier = Modifier.padding(16.dp)
-                                ) {
-                                    Text(
-                                        text = "= Jalur Masuk =",
-                                        fontSize = 14.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        color = Color.Gray,
-                                        modifier = Modifier.padding(16.dp),
-                                    )
-                                    ParkingAreaLayout(
-                                        parkingList = parkingList,
-                                        modifier = Modifier.fillMaxWidth(1f)
-                                    )
-                                    Text(
-                                        text = "= Jalur Keluar =",
-                                        fontSize = 14.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        color = Color.Gray,
+                                Box {
+                                    Column(
                                         modifier = Modifier.padding(16.dp)
-                                    )
+                                    ) {
+                                        Text(
+                                            text = "= Jalur Masuk =",
+                                            fontSize = 14.sp,
+                                            fontWeight = FontWeight.Medium,
+                                            color = Color.Gray,
+                                            modifier = Modifier.padding(16.dp),
+                                        )
+                                        ParkingAreaLayout(
+                                            parkingList = parkingList,
+                                            modifier = Modifier.fillMaxWidth(1f)
+                                        )
+                                        Text(
+                                            text = "= Jalur Keluar =",
+                                            fontSize = 14.sp,
+                                            fontWeight = FontWeight.Medium,
+                                            color = Color.Gray,
+                                            modifier = Modifier.padding(16.dp)
+                                        )
+                                    }
                                 }
                             }
                         }

@@ -93,18 +93,18 @@ fun MainApp(
 
             composable(
                 route = Screen.Detail.route,
-                enterTransition = {
-                    slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(500, easing = EaseIn)
-                    )
-                },
-                exitTransition = {
-                    slideOutOfContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(500, easing = EaseIn)
-                    )
-                }
+//                enterTransition = {
+//                    slideIntoContainer(
+//                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+//                        animationSpec = tween(500, easing = EaseIn)
+//                    )
+//                },
+//                exitTransition = {
+//                    slideOutOfContainer(
+//                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+//                        animationSpec = tween(500, easing = EaseIn)
+//                    )
+//                }
             ) {
                 ParkingDetailScreen(
                     navigateBack = {
